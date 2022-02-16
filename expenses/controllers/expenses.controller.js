@@ -36,6 +36,20 @@ const getExpenses = async (req,res)=>{
     }
 }
 
+const getExpensesByType = async (req,res)=>{
+    try{
+        const expenses = await Expenses.find({type: req.params.type});
+        if(!expenses) return res.status(400).json({msg: "expenses not found"})        
+        res.status(200).json(expenses);
+    }
+    catch(err){
+        return res.status(400).json({msg: "Something went wrong!"})
+    }
+}
+// reimburse an expense - POST
+// get all expenses raised between date 1 and date 2 - GET - sort by desc or asc date
+// get all expenses grouped by type and sort by desc or asc counts- GET
+// get average time to reimburse an expense - GET
 const createExpenses = async (req,res)=>{
     try{
         const errors = validationResult(req);
@@ -99,6 +113,7 @@ const patchExpenses = async (req,res)=>{
 module.exports = {
     getAllExpenses,
     getExpenses,
+    getExpensesByType,
     createExpenses,
     deleteExpenses,
     patchExpenses

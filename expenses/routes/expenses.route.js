@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const {
   getAllExpenses,
   getExpenses,
+  getExpensesByType,
   createExpenses,
   deleteExpenses,
   patchExpenses,
@@ -16,6 +17,8 @@ const validateExpenses = require("../utils/validateExpenses");
 router.get("/", getAllExpenses);
 
 router.get("/:employee_id", getExpenses);
+
+router.get("/type/:type", getExpensesByType);
 
 router.post("/", createExpenses);
 
