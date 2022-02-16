@@ -7,6 +7,7 @@ const {
   createExpenses,
   deleteExpenses,
   patchExpenses,
+  getAllExpensesByTypeInAscOrder
 } = require("../controllers/expenses.controller");
 
 const router = express.Router();
@@ -15,6 +16,8 @@ const Expenses = require("../models/expenses.model");
 const validateExpenses = require("../utils/validateExpenses");
 
 router.get("/", getAllExpenses);
+
+router.get("/type", getAllExpensesByTypeInAscOrder);
 
 router.get("/:employee_id", getExpenses);
 

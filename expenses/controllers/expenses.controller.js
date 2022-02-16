@@ -36,6 +36,18 @@ const getExpenses = async (req,res)=>{
     }
 }
 
+// get all expenses raised between date 1 and date 2 - GET - sort by desc or asc date
+const getAllExpensesByTypeInAscOrder = async(req,res) => {
+    try{
+        const expenses = await Expenses.find({},{type:1,_id:0}).sort({type:1});
+        if(!expenses) return res.status(400).json({msg: "expenses not found"})        
+        res.status(200).json(expenses);
+    }
+    catch(err){
+        return res.status(400).json({msg: "Something went wrong!"})
+    }
+}
+// get all expenses by type
 const getExpensesByType = async (req,res)=>{
     try{
         const expenses = await Expenses.find({type: req.params.type});
@@ -46,7 +58,7 @@ const getExpensesByType = async (req,res)=>{
         return res.status(400).json({msg: "Something went wrong!"})
     }
 }
-// reimburse an expense - POST
+
 // get all expenses raised between date 1 and date 2 - GET - sort by desc or asc date
 // get all expenses grouped by type and sort by desc or asc counts- GET
 // get average time to reimburse an expense - GET
@@ -86,6 +98,7 @@ const deleteExpenses =  async (req,res)=>{
     }
 }
 
+// reimburse an expense - POST
 const patchExpenses = async (req,res)=>{
     try{
         if(!req.body.type) return res.status(400).json({msg: "Type is required"});
@@ -116,5 +129,6 @@ module.exports = {
     getExpensesByType,
     createExpenses,
     deleteExpenses,
-    patchExpenses
+    patchExpenses,
+    getAllExpensesByTypeInAscOrder
 };
