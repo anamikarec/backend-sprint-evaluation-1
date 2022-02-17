@@ -5,7 +5,7 @@ const cors= require('cors');
 const connect = require('./app/config/db');
 
 const employeeRoute = require("./app/routes/employee.route");
-const expensesRoute = require("./expenses/routes/expenses.route");
+const expensesRoute = require("./app/routes/expenses.route");
 
 const PORT=5001;
 

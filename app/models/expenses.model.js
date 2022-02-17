@@ -8,7 +8,9 @@ const ExpensesSchema= new mongoose.Schema({
     dateOfExpense : {type : Number, required: true},
     reimbursed : {type: Boolean, required: true},
     reimbursed_date : {type: Date, required: true},
-})
+},
+{timestamps: { created_at: () => Date.now() }}
+)
 
 //Models
 const Expenses= mongoose.model("Expenses",ExpensesSchema);
